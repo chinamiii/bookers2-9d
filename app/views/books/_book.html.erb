@@ -1,0 +1,51 @@
+ <div class="new mt-3">
+
+  <h2>New book</h2>
+
+  <%= form_with model: book, local:true do |f| %>
+
+   <div class="form mb-3">
+      <%= f.label :Title %>
+      <%= f.text_field :title, class:"form-control" %>
+   </div>
+   <div class="form mb-3">
+      <%= f.label :Opinion %>
+      <%= f.text_area :body, class:"form-control" %>
+   </div>
+   <div class="form mb-3">
+      <%= f.label :category %>
+      <%= f.text_area :category, class:"form-control" %>
+   </div>
+
+   <!-- 評価 -->
+   <div class="form-group row" id="star">
+     <%= f.label :rate,'評価 ', class:'col-md-3 col-form-label' %>
+     <%= f.hidden_field :rate, id: :review_star %>
+   </div>
+
+  <!-- 評価javascript -->
+   <script>
+    $('#star').raty({
+     size     : 20,
+     starOff:  '<%= asset_path('star-off.png') %>',
+     starOn : '<%= asset_path('star-on.png') %>',
+     starHalf: '<%= asset_path('star-half.png') %>',
+     scoreName: 'book[rate]',
+     half: true,
+    });
+   </script>
+
+   <!-- 'book[rate]'→bookカラムに保存するので忘れないように -->
+   <!-- half: true, # ★の半分の入力を行う-->
+
+    <div class="actions mb-3">
+      <%= f.submit 'Create Book', class:"btn btn-sm btn-success" %>
+    </div>
+
+  <% end %>
+
+
+
+</div>
+
+
